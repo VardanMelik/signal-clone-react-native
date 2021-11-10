@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { StyleSheet, View, Text, KeyboardAvoidingView } from 'react-native'
 import { Button, Input, Image } from 'react-native-elements'
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -54,6 +54,9 @@ const LoginScreen = () => {
                 title="Register"
                 type="outline"
                 containerStyle={styles.button}
+                onPress={
+                    () => navigation.navigate('Register')
+                }
             />
             <View style={{ height: 100 }} />
         </KeyboardAvoidingView>
@@ -71,9 +74,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     inputContainer: {
-
+        width: 300
     },
     button: {
-
+        width: 200,
+        marginTop: 10
     }
 })
