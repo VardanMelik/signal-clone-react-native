@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar'
 import React, { useState, useLayoutEffect } from 'react'
 import { KeyboardAvoidingView, StyleSheet, View } from 'react-native'
 import { Button, Input, Image, Text } from 'react-native-elements'
+import { auth } from '../firebase'
 
 const RegisterScreen = ({ navigation }) => {
     const [name, setName] = useState('')
@@ -16,7 +17,15 @@ const RegisterScreen = ({ navigation }) => {
     }, [navigation])
 
     const register = () => {
-
+        auth.createUserWithEmailAndPassword(email, password)
+        .then( authUser => {
+            authUser.user.update({
+                displayName: name,
+                photoURL: imageUrl || 
+                "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png"
+            })
+        } )
+        .catch( error => alert(error.message) )
     }
 
     return (
